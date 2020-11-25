@@ -87,8 +87,10 @@ export default class Details extends Component {
 
           <div>
             <b>{currency.formatCurrency(product["per_person_price"])}</b>
-
+            <br />
+            <br />
             <button
+              id="remove_button"
               className="btn btn-info"
               onClick={() => this.removeWishlist(product["uniq_id"])}
             >

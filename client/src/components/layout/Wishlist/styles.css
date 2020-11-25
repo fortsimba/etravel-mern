@@ -8,3 +8,7 @@ h1 {
 img {
   border-radius: 20px;
 }
+
+#remove_button {
+  background-color: #14274e;
+}

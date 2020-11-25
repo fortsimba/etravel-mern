@@ -91,7 +91,7 @@ export default class Details extends Component {
   render() {
     return (
       <div className="form">
-        <h1>Account Data: </h1>
+        <h1 className="form_title">Account Data: </h1>
         <br />
         <p>Name: {this.state.userData.name}</p>
         <p>Phone: {this.state.userData.phone}</p>
@@ -102,7 +102,7 @@ export default class Details extends Component {
           {this.state.userData.pincode} {this.state.userData.country}
         </p>
         <br />
-        <h1>Update records below: </h1>
+        <h1 className="form_title">Update records below: </h1>
         <br />
         <Form onSubmit={this.onSubmit}>
           <Form.Group controlId="name">
@@ -195,7 +195,7 @@ export default class Details extends Component {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button id="submit-button" variant="primary" type="submit">
             Submit
           </Button>
         </Form>
