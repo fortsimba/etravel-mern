@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 var mongojs = require('mongojs');
-var dbjs = mongojs('ecommerce');
+var dbjs = mongojs('etravel');
 
 router.post("/", (req, res, next) => {
   if(req.body.update[0]){

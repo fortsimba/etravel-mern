@@ -87,7 +87,7 @@ export default class Details extends Component {
     axios
       .post("/api/wishlist", { mode, user, product })
       .then((res) => {
-        alert("Item added to wishlist!");
+        alert("Item saved for later!");
       })
       .catch((err) => {
         console.log(err);
