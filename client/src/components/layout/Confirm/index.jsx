@@ -13,17 +13,6 @@ export default class Confirm extends Component{
     constructor(props){
         super(props);
         this.state = { hotel_id:'' ,hotel_name:'' , room_type: '' , no_room:'' , price:'' , name: '' , email:'' , phone:'' , checkin:'' , checkout:''};
-        let query = QueryString.parse(this.props.location.search);
-        console.log(query.hotel_id)
-        this.setState({
-            hotel_id: query.hotel_id,
-            hotel_name: query.hotel_name,
-            room_type: query.room_type,
-            no_rooms : query.no_rooms,
-            price : query.price,
-            checkin: query.check_in,
-            checkout: query.check_out
-        })
     }
 
     componentWillMount(){
