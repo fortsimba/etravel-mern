@@ -208,7 +208,7 @@ export default class Details extends Component {
               <br />
               <label for="room_type"> Room Type: </label> &ensp;
               <select id="room_type" name="room_type" required>
-                {htl["room_types"].map((object, i) => <option value={i}>{object}</option>)}
+                {htl["room_types"].map((object, i) => <option value={object}>{object}</option>)}
               </select>
               &emsp; &emsp;
               <label for="no_rooms"> Number of Rooms: </label> &ensp;
@@ -233,6 +233,7 @@ export default class Details extends Component {
               <input type="hidden" id="hotel" name="hotel" value={htl["uniq_id"]} />
               <input type="hidden" id="price" name="price" value={htl["per_person_price"]} />
               <input type="hidden" id="hotel_name" name="hotel_name" value={htl["property_name"]} />
+              <input type="hidden" id="address" name="address" value={htl["address"]} />
             </form>
           </div>
           <hr />

@@ -113,6 +113,30 @@ app.route("/api/details").post((req , res ) => {
     });
   })
 
+app.route("/api/booking").post((req,res)=>{
+  dbjs.users.update({'_id' : req.body.id},{ $push: {
+    'hotel' : req.body.hotel_name,
+    'hotel_id' : req.body.hotel_id,
+    'room_type' : req.body.room_type,
+    'no_rooms' : req.body.no_rooms,
+    'checkin' : req.body.checkin,
+    'checkout' : req.body.checkout,
+    'total' : req.body.total
+  }},{ upsert : true })
+  dbjs.on('error',function(err){
+    return res.status(400).json({errors:'Booking Not Confirmed'})
+  })
+  return res.status(200).json({success:'Booking Confirmed'})
+}).get(function(req,res) {
+  dbjs.users.find({},async function(err , docs){
+    if(err) throw err;
+    await res.json(docs);
+  })
+}
+  )
+
+
+
 app.get("/", (req, res) => res.send("Hello World!"));
 
 app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!\n\n\n\n\n\n\n`));
