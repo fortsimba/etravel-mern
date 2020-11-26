@@ -48,10 +48,19 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.get("/api/hotel_import", function(req, res){
+app.get("/api/hotel_all", function(req, res){
   dbjs.hotel.findOne({},async function(err, docs){
     if(err) throw err;
     await res.json(docs);
+  });
+});
+
+app.get("/api/hotel_import", async function(req,res){
+  console.log(req.query.id)
+  dbjs.hotel.findOne({"hotels.uniq_id": req.query.id},{"hotels.$":1}, function(err, docs){
+    if(err) throw err
+    console.log(docs)
+    res.json(docs.hotels)
   });
 });
 

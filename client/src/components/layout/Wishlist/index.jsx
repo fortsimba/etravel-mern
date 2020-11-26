@@ -17,32 +17,44 @@ export default class Details extends Component {
       this.setState({
         wishlist: res.data,
       });
+    })
+    .then(()=>{
+      for(var i=0;i<this.state.wishlist.length;i++){
+        axios
+          .get("/api/hotel_import", { params: {id: this.state.wishlist[i]}})
+          .then((res) => {
+            this.setState({
+              filteredProducts: this.state.filteredProducts.concat(res.data[0])
+            });
+          });
+      }
+      // axios
+      //   .get("/api/hotel_import", { params: {id: this.state.wishlist}})
+      //   .then((res) => {
+      //     console.log(res)
+      //     this.setState({
+      //       products: res.data.hotels,
+      //     });
+      //   })
+      //   .then(() => {
+      //     if (!this.state.wishlist) {
+      //       return;
+      //     }
+      //     var i, j;
+      //     for (i = 0; i < this.state.wishlist.length; i++) {
+      //       for (j = 0; j < this.state.products.length; j++) {
+      //         if (this.state.products[j]["uniq_id"] == this.state.wishlist[i]) {
+      //           this.setState({
+      //             filteredProducts: this.state.filteredProducts.concat(
+      //               this.state.products[j]
+      //             ),
+      //           });
+      //         }
+      //       }
+      //       console.log(this.state.filteredProducts);
+      //     }
+      //   });
     });
-    axios
-      .get("/api/hotel_import")
-      .then((res) => {
-        this.setState({
-          products: res.data.hotels,
-        });
-      })
-      .then(() => {
-        if (!this.state.wishlist) {
-          return;
-        }
-        var i, j;
-        for (i = 0; i < this.state.wishlist.length; i++) {
-          for (j = 0; j < this.state.products.length; j++) {
-            if (this.state.products[j]["uniq_id"] == this.state.wishlist[i]) {
-              this.setState({
-                filteredProducts: this.state.filteredProducts.concat(
-                  this.state.products[j]
-                ),
-              });
-            }
-          }
-          console.log(this.state.filteredProducts);
-        }
-      });
   }
   removeWishlist(product) {
     console.log(this.state.wishlist);
@@ -74,7 +86,7 @@ export default class Details extends Component {
       <div className="col-md-6">
         <div className="thumbnail text-center">
           <div>
-            <Link to={`/product/${product["Uniq Id"]}`}>
+            <Link to={`/product/${product["uniq_id"]}`}>
               <img
                 width="400"
                 height="300"
@@ -101,6 +113,7 @@ export default class Details extends Component {
         </div>
       </div>
     ));
+    // console.log(productItems)
     return (
       <div>
         <br />

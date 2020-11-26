@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Spinner} from "react-bootstrap"
 
 export default class Filter extends Component {
   render() {
@@ -39,7 +40,7 @@ export default class Filter extends Component {
           </div>
         </div>
         <hr />
-        <div>{this.props.count} products found.</div>
+        <div>{this.props.count? this.props.count+' hotels found' : <Spinner animation="border" role="status" size="lg" variant="info" style={{marginLeft:"800px",width:"200px",height:"200px", marginTop:"-400px", position:"absolute"}}><span className="sr-only">Loading...</span></Spinner>}</div>
       </container>
     );
   }

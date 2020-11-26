@@ -6,6 +6,7 @@ import { Row } from "react-bootstrap";
 import "./styles.css";
 import FuzzySearch from "react-fuzzy";
 import Banner from "./Banner.js";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 class Landing extends Component {
   constructor(props) {
@@ -15,10 +16,11 @@ class Landing extends Component {
     this.handleChangeCategory = this.handleChangeCategory.bind(this);
   }
   componentWillMount() {
-    axios.get("/api/hotel_import").then((res) => {
+    axios.get("/api/hotel_all").then((res) => {
       this.setState({
         hotels: res.data.hotels,
-        filteredHotels: res.data.hotels,
+        filteredHotels: res.data.hotels.slice(0,100),
+        category: ""
       });
     });
   }
@@ -108,11 +110,11 @@ class Landing extends Component {
                                   )
                                 }
                               >
-                                <img
+                                <LazyLoadImage
                                   width="100"
                                   height="100"
                                   src={val["image_urls"]}
-                                ></img>
+                                />
                                 <p>{val["property_name"]}</p>
                               </div>
                             );
@@ -127,13 +129,13 @@ class Landing extends Component {
             {/*className="col-md-8"*/}
             <hr />
             <Banner />
-
+{console.log(this.state.category)}
             <Filter
               category={this.state.category}
               sort={this.state.sort}
               handleChangeCategory={this.handleChangeCategory}
               handleChangeSort={this.handleChangeSort}
-              count={this.state.filteredHotels.length}
+              count={this.state.hotels.length}
             />
             <hr />
             <Hotels

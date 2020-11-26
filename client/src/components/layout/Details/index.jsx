@@ -16,13 +16,12 @@ export default class Details extends Component {
   }
   componentWillMount() {
     var prod_id = this.props.match.params.id;
-
-    axios.get("/api/hotel_import").then((res) =>
+    axios.get("/api/hotel_import",{ params: {id: prod_id}}).then((res) =>
       this.setState({
-        hotels: res.data.hotels,
+        hotels: res.data,
       })
     );
-
+    console.log(this.state.hotels)
     axios
       .get("/api/details", {
         params: {
@@ -166,6 +165,7 @@ export default class Details extends Component {
   }
 
   render() {
+    console.log(this.state.hotels)
     const item = this.props.match.params.id;
     const arr = this.state.hotels;
     let htl = null;
