@@ -10,6 +10,7 @@ import Details from "./components/layout/Details";
 import Cart from "./components/layout/Cart";
 import Wishlist from "./components/layout/Wishlist";
 import Orders from "./components/layout/Orders";
+import Confirm from "./components/layout/Confirm"
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 if (!localStorage.getItem("token")) {
@@ -42,6 +43,7 @@ const App = () => {
         <Route exact path="/orders">
           <Orders />
         </Route>
+        <Route exact path="/confirm" component={Confirm} />
         <Footer />
       </div>
     </Router>

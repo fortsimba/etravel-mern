@@ -199,7 +199,7 @@ export default class Details extends Component {
           <br />
 
           <div>
-            <form method="get" action="" name="booking">
+            <form method="get" action="/confirm" name="booking">
               <label for="check-in">Check-In Date: </label> &ensp;
               <input type="date" id="check-in" name="check-in" required />
               &emsp; &emsp;
@@ -226,10 +226,13 @@ export default class Details extends Component {
                 //Total ammount is {document.getElementById('no_rooms').value * htl["per_person_price"]}
               }
               <input
-                type="reset"
+                type="submit"
                 value="Book"
                 onClick={() => this.book(htl["uniq_id"])}
               />
+              <input type="hidden" id="hotel" name="hotel" value={htl["uniq_id"]} />
+              <input type="hidden" id="price" name="price" value={htl["per_person_price"]} />
+              <input type="hidden" id="hotel_name" name="hotel_name" value={htl["property_name"]} />
             </form>
           </div>
           <hr />
