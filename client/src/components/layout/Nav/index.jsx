@@ -12,8 +12,8 @@ const Nav = () => {
   const [show, setShow] = useState(false);
   const Dropdown = () => (
     <NavDropdown title="Welcome!" id="collapsible-nav-dropdown">
-      <NavDropdown.Item href="/profile">My profile</NavDropdown.Item>
-      <NavDropdown.Item href="/wishlist">Wishlist</NavDropdown.Item>
+      <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+      <NavDropdown.Item href="/wishlist">My Saves</NavDropdown.Item>
       <NavDropdown.Item href="/orders">Orders</NavDropdown.Item>
       <NavDropdown.Divider />
       <NavDropdown.Item
@@ -33,7 +33,8 @@ const Nav = () => {
         <Row>
           <img
             className="logo_icon"
-            src="https://www.flaticon.com/premium-icon/icons/svg/3060/3060137.svg"
+            // src="https://www.flaticon.com/premium-icon/icons/svg/3060/3060137.svg"
+            src="https://www.flaticon.com/svg/static/icons/svg/2111/2111615.svg"
           ></img>
           <h1 className="logo">goHotels</h1>
         </Row>

@@ -2,3 +2,12 @@
   width: 70%;
   margin-left: 200px;
 }
+
+.form_title {
+  color: #14274e;
+  font-size: 35px;
+}
+
+#submit-button {
+  background-color: #14274e;
+}
