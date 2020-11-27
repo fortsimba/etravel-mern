@@ -11,6 +11,7 @@ import Cart from "./components/layout/Cart";
 import Wishlist from "./components/layout/Wishlist";
 import Orders from "./components/layout/Orders";
 import Confirm from "./components/layout/Confirm"
+import Bookings from "./components/layout/Bookings"
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 if (!localStorage.getItem("token")) {
@@ -42,6 +43,9 @@ const App = () => {
         </Route>
         <Route exact path="/orders">
           <Orders />
+        </Route>
+        <Route exact path="/bookings">
+          <Bookings/>
         </Route>
         <Route exact path="/confirm" component={Confirm} />
         <Footer />
