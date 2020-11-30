@@ -30,10 +30,19 @@ export default class Filter extends Component {
                 onChange={this.props.handleChangeCategory}
               >
                 <option value="">ALL</option>
-                <option value="Kolkata">Kolkata</option>
-                <option value="Mumbai">Mumbai</option>
-                <option value="Manali">Manali</option>
-                <option value="Udaipur">Udaipur</option>
+                <option value="Lazio">Lazio</option>
+                <option value="North Holland Province">
+                  North Holland Province
+                </option>
+                <option value="Community of Madrid">Community of Madrid</option>
+                <option value="Ile-de-France">Ile-de-France</option>
+                <option value="Catalonia">Catalonia</option>
+                <option value="Hesse">Hesse</option>
+                <option value="Veneto">Veneto</option>
+                <option value="Tuscany">Tuscany</option>
+                <option value="Illinois">Illinois</option>
+                <option value="Ontario">Ontario</option>
+                <option value="Tennessee">Tennessee</option>
               </select>
             </label>
           </div>
