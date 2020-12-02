@@ -82,7 +82,7 @@ app.get("/api/profile_import", function(req, res){
 });
 app.use("/api/profile_update", profile);
 app.route("/api/wishlist").post((req,res,next) => {
-  if(req.body.mode=="add"){
+  if(req.query.mode=="add"){
     dbjs.users.update({_id:mongojs.ObjectId(req.body.user)}, {$push: {'wishlist':req.body.product}});
   }
   else{
@@ -139,8 +139,76 @@ app.route("/api/booking").post((req,res)=>{
     await res.json(docs);
   })
 }
-  )
-
+)
+var child = /\bkids' meals\b|\bgame room\b/
+var family = /\binterconnected rooms available\b|\bpool\b/
+var business = /\bmeeting rooms\b|\bconference facilities\b/
+var breakfast = /\bbreakfast\b/
+var smoking = /\bsmoking\b/
+var nonSmoking = /\bnon-smoking\b/
+app.route('/api/featureSearch').get(function(req,res){
+  dbjs.hotel.find({},{"hotels.uniq_id": 1,"hotels.room":1, "hotels.hotel":1}, async function(err, docs){
+    if(err) throw err;
+    var hotelList = docs[0].hotels
+    hotels = []
+    if(req.query.mode=="child"){
+      for(var i=0;i<hotelList.length;i++){
+        var str = docs[0].hotels[i].room.join(" ").toLowerCase()+docs[0].hotels[i].hotel.join(" ").toLowerCase();
+        found = str.match(child)
+        if(found){
+          hotels.push(docs[0].hotels[i].uniq_id)
+        }
+      }
+    }
+    if(req.query.mode=="family"){
+      for(var i=0;i<hotelList.length;i++){
+        var str = docs[0].hotels[i].room.join(" ").toLowerCase()+docs[0].hotels[i].hotel.join(" ").toLowerCase();
+        found = str.match(family)
+        if(found){
+          hotels.push(docs[0].hotels[i].uniq_id)
+        }
+      }
+    }
+    if(req.query.mode=="business"){
+      for(var i=0;i<hotelList.length;i++){
+        var str = docs[0].hotels[i].room.join(" ").toLowerCase()+docs[0].hotels[i].hotel.join(" ").toLowerCase();
+        found = str.match(business)
+        if(found){
+          hotels.push(docs[0].hotels[i].uniq_id)
+        }
+      }
+    }
+    if(req.query.mode=="breakfast"){
+      for(var i=0;i<hotelList.length;i++){
+        var str = docs[0].hotels[i].room.join(" ").toLowerCase()+docs[0].hotels[i].hotel.join(" ").toLowerCase();
+        found = str.match(breakfast)
+        if(found){
+          hotels.push(docs[0].hotels[i].uniq_id)
+        }
+      }
+    }
+    if(req.query.mode=="smoking"){
+      for(var i=0;i<hotelList.length;i++){
+        var str = docs[0].hotels[i].room.join(" ").toLowerCase()+docs[0].hotels[i].hotel.join(" ").toLowerCase();
+        found = str.match(smoking)
+        if(found){
+          hotels.push(docs[0].hotels[i].uniq_id)
+        }
+      }
+    }
+    if(req.query.mode=="noSmoking"){
+      for(var i=0;i<hotelList.length;i++){
+        var str = docs[0].hotels[i].room.join(" ").toLowerCase()+docs[0].hotels[i].hotel.join(" ").toLowerCase();
+        found = str.match(smoking)
+        if(found){
+          hotels.push(docs[0].hotels[i].uniq_id)
+        }
+      }
+    }
+    console.log(hotels)
+    res.json(hotels)
+  })
+})
 
 
 app.get("/", (req, res) => res.send("Hello World!"));

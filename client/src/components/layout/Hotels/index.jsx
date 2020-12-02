@@ -48,6 +48,9 @@ export default class Hotels extends Component {
       });
   }
   render() {
+    if(!this.props.hotels.length){
+      return(<div><h2>No results found! Try removing some filters.</h2><Link to={"/"}>Go back home</Link></div>)
+    }
     const hotels = this.props.hotels.map((hotel) => (
       <div className="col-md-4" key={hotel["uniq_id"]}>
         <div className="thumbnail text-center product_component">
