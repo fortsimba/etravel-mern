@@ -24,8 +24,8 @@ class Landing extends Component {
   componentWillMount() {
     axios.get("/api/hotel_all").then((res) => {
       this.setState({
-        hotels: res.data.hotels.slice(0,100),
-        filteredHotels: res.data.hotels.slice(0,100),
+        hotels: res.data.hotels.slice(0,700),
+        filteredHotels: res.data.hotels.slice(0,700),
         category: "",
         child: "",
         family: "",
@@ -268,6 +268,7 @@ class Landing extends Component {
             <button className={this.state.selected[4]} value="do" onClick={this.handleFilterSmoking}>Smoking Allowed</button>
             <button className={this.state.selected[5]} value="do" onClick={this.handleFilterNoSmoke}>Non Smoking</button>
             <br /><br/>
+            <button onClick={()=>{console.log(this.state.filteredHotels)}}>Check</button>
             <Link to={{pathname:`/results`, state:this.state}}><button className="searchBtn">Find Hotels</button></Link>
         </div>
       </div>
