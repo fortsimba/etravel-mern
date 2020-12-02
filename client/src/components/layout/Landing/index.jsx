@@ -11,13 +11,15 @@ class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = { hotels: [], filteredHotels: [], selected:[] };
-    this.handleChangeCategory = this.handleChangeCategory.bind(this);
+    this.handleChangeCity = this.handleChangeCity.bind(this);
     this.handleFilterChild = this.handleFilterChild.bind(this);
     this.handleFilterFamily = this.handleFilterFamily.bind(this);
     this.handleFilterBusiness = this.handleFilterBusiness.bind(this);
     this.handleFilterBreakfast = this.handleFilterBreakfast.bind(this);
     this.handleFilterSmoking = this.handleFilterSmoking.bind(this);
     this.handleFilterNoSmoke = this.handleFilterNoSmoke.bind(this);
+    this.handleChangeCity = this.handleChangeCity.bind(this);
+    this.filterCities = this.filterCities.bind(this);
   }
   componentWillMount() {
     axios.get("/api/hotel_all").then((res) => {
@@ -31,14 +33,15 @@ class Landing extends Component {
         breakfast: "",
         smoking: "",
         noSmoking: "",
+        city: "",
         selected: ["filterButton","filterButton","filterButton","filterButton","filterButton","filterButton"]
       });
     });
   }
 
-  handleChangeCategory(e) {
-    this.setState({ category: e.target.value });
-    this.listProducts();
+  handleChangeCity(e) {
+    this.setState({ city: e.target.value });
+    this.filterCities();
   }
 
   async handleFilterChild(e){
@@ -216,31 +219,13 @@ class Landing extends Component {
     }
   }
 
-  listProducts(){
+  filterCities(){
     this.setState((state) =>{
-      if (state.category !== "") {
+      if (state.city !== "") {
         return {
           filteredHotels: state.filteredHotels.filter(
-            (a) => a["city"].indexOf(state.category) >= 0
+            (a) => a["city"].indexOf(state.city) >= 0
           ),
-        };
-      }
-      if(state.child != ""){
-          var mode = "child";
-          console.log(mode)
-          axios.get("/api/featureSearch",{ params: {mode: mode}}).then((res) =>{
-            var a3 = state.filteredHotels.filter(
-              a=>res.data.includes(a['uniq_id'])
-            )
-            console.log(a3)
-            return{
-              filteredHotels: a3
-            }
-          })
-      }
-      if (state.category !== "") {
-        return {
-          filteredHotels: state.product((a) => a["city"]),
         };
       }
     })
@@ -252,6 +237,30 @@ class Landing extends Component {
         <Banner />
         <br/>
         <div className="filter-select">
+            <label>
+              City
+              <select
+                className="form-control"
+                value={this.state.city}
+                onChange={this.handleChangeCity}
+              >
+                <option value="">ALL</option>
+                <option value="Lazio">Lazio</option>
+                <option value="North Holland Province">
+                  North Holland Province
+                </option>
+                <option value="Community of Madrid">Community of Madrid</option>
+                <option value="Ile-de-France">Ile-de-France</option>
+                <option value="Catalonia">Catalonia</option>
+                <option value="Hesse">Hesse</option>
+                <option value="Veneto">Veneto</option>
+                <option value="Tuscany">Tuscany</option>
+                <option value="Illinois">Illinois</option>
+                <option value="Ontario">Ontario</option>
+                <option value="Tennessee">Tennessee</option>
+              </select>
+            </label>
+            <br />
             <button className={this.state.selected[0]} value="do" onClick={this.handleFilterChild}>Child Friendly</button>
             <button className={this.state.selected[1]} value="do" onClick={this.handleFilterFamily}>Family Friendly</button>
             <button className={this.state.selected[2]} value="do" onClick={this.handleFilterBusiness}>Business Oriented</button>
