@@ -11,10 +11,10 @@ import { Link } from "react-router-dom";
 const Nav = () => {
   const [show, setShow] = useState(false);
   const Dropdown = () => (
-    <NavDropdown title="Welcome!" id="collapsible-nav-dropdown">
+    <NavDropdown className="border" title="Welcome!" id="collapsible-nav-dropdown">
       <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
       <NavDropdown.Item href="/wishlist">My Saves</NavDropdown.Item>
-      <NavDropdown.Item href="/orders">Orders</NavDropdown.Item>
+      <NavDropdown.Item href="/orders">Bookings</NavDropdown.Item>
       <NavDropdown.Divider />
       <NavDropdown.Item
         onClick={() => {
@@ -56,11 +56,6 @@ const Nav = () => {
           </LoginButton>
         </li>
 
-        <li className="nav-item">
-          <LoginButton size="lg" className="ml-auto" href="/cart">
-            Cart
-          </LoginButton>
-        </li>
         <li className="nav-item">
           {(() => {
             if (localStorage.getItem("token") === "") {

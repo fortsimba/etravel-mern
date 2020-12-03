@@ -69,12 +69,6 @@ export default class Details extends Component {
   }
   addWishlist(product) {
     this.removeCart(product);
-    axios
-      .post("/api/wishlist_count", { pid: product, mode: "inc" })
-      .catch((err) => {
-        console.log(err);
-        console.log(err.response);
-      });
     var mode = "add";
     axios
       .post("/api/wishlist", { mode, user, product })
@@ -159,19 +153,14 @@ export default class Details extends Component {
             return <p>No items in the cart!</p>;
           }
         })()}
-        <h1>Account Data: </h1>
+        <h1>Account Details: </h1>
         <br />
         <p>Name: {this.state.userData.name}</p>
         <p>Phone: {this.state.userData.phone}</p>
         <p>Email: {this.state.userData.email}</p>
-        <p>
-          Address: {this.state.userData.line1} {this.state.userData.line2},{" "}
-          {this.state.userData.city}, {this.state.userData.state},{" "}
-          {this.state.userData.pincode} {this.state.userData.country}
-        </p>
         <br />
         <a href="/update_profile">
-          <button className="btn btn-info">Update Address</button>
+          <button className="btn btn-info">Update Profile</button>
         </a>
         <br />
         <br />

@@ -12,12 +12,6 @@ export default class Details extends Component {
       name: "",
       email: "",
       phone: "",
-      aline1: "",
-      aline2: "",
-      acity: "",
-      astate: "",
-      acountry: "",
-      apincode: "",
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -40,24 +34,6 @@ export default class Details extends Component {
       case "email":
         this.setState({ email: event.target.value });
         break;
-      case "aline1":
-        this.setState({ aline1: event.target.value });
-        break;
-      case "aline2":
-        this.setState({ aline2: event.target.value });
-        break;
-      case "acity":
-        this.setState({ acity: event.target.value });
-        break;
-      case "astate":
-        this.setState({ astate: event.target.value });
-        break;
-      case "acountry":
-        this.setState({ acountry: event.target.value });
-        break;
-      case "apincode":
-        this.setState({ apincode: event.target.value });
-        break;
     }
   }
   onSubmit(event) {
@@ -65,13 +41,7 @@ export default class Details extends Component {
     var inputData = [
       this.state.name,
       this.state.phone,
-      this.state.email,
-      this.state.aline1,
-      this.state.aline2,
-      this.state.acity,
-      this.state.astate,
-      this.state.acountry,
-      this.state.apincode,
+      this.state.email
     ];
     axios
       .post("/api/profile_update", {
@@ -96,11 +66,6 @@ export default class Details extends Component {
         <p>Name: {this.state.userData.name}</p>
         <p>Phone: {this.state.userData.phone}</p>
         <p>Email: {this.state.userData.email}</p>
-        <p>
-          Address: {this.state.userData.line1} {this.state.userData.line2},{" "}
-          {this.state.userData.city}, {this.state.userData.state},{" "}
-          {this.state.userData.pincode} {this.state.userData.country}
-        </p>
         <br />
         <h1 className="form_title">Update records below: </h1>
         <br />
@@ -131,66 +96,6 @@ export default class Details extends Component {
               type="text"
               placeholder="Email:"
               defaultValue={this.state.userData.email}
-              onChange={this.onChange}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="aline1">
-            <Form.Label>Address Line 1</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Line 1:"
-              defaultValue={this.state.userData.line1}
-              onChange={this.onChange}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="aline2">
-            <Form.Label>Address Line 2</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Line 2 (Optional):"
-              defaultValue={this.state.userData.line2}
-              onChange={this.onChange}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="acity">
-            <Form.Label>City</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="City:"
-              defaultValue={this.state.userData.city}
-              onChange={this.onChange}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="astate">
-            <Form.Label>State</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="State:"
-              defaultValue={this.state.userData.state}
-              onChange={this.onChange}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="acountry">
-            <Form.Label>Country</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Country:"
-              defaultValue={this.state.userData.country}
-              onChange={this.onChange}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="apin">
-            <Form.Label>Pin Code</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Pincode:"
-              defaultValue={this.state.userData.pincode}
               onChange={this.onChange}
             />
           </Form.Group>

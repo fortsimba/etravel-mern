@@ -15,17 +15,9 @@ const Profile = () => {
         </li>
         <hr />
         <li>
-          <a href="/cart">
-            <button id="profile_button" className="btn btn-info">
-              My Cart
-            </button>
-          </a>
-        </li>
-        <hr />
-        <li>
           <a href="/orders">
             <button id="profile_button" className="btn btn-info">
-              My Orders
+              My Booking
             </button>
           </a>
         </li>
@@ -33,7 +25,7 @@ const Profile = () => {
         <li>
           <a href="/wishlist">
             <button id="profile_button" className="btn btn-info">
-              My Wishlist
+              My Saves
             </button>
           </a>
         </li>

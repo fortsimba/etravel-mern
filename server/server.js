@@ -56,11 +56,12 @@ app.get("/api/hotel_all", function(req, res){
 });
 
 app.get("/api/hotel_import", async function(req,res){
-  console.log(req.query.id)
   dbjs.hotel.findOne({"hotels.uniq_id": req.query.id},{"hotels.$":1}, function(err, docs){
     if(err) throw err
-    console.log(docs)
-    res.json(docs.hotels)
+    if(docs)
+    {
+      res.json(docs.hotels)
+    }
   });
 });
 
@@ -82,7 +83,7 @@ app.get("/api/profile_import", function(req, res){
 });
 app.use("/api/profile_update", profile);
 app.route("/api/wishlist").post((req,res,next) => {
-  if(req.query.mode=="add"){
+  if(req.body.mode=="add"){
     dbjs.users.update({_id:mongojs.ObjectId(req.body.user)}, {$push: {'wishlist':req.body.product}});
   }
   else{
@@ -205,7 +206,6 @@ app.route('/api/featureSearch').get(function(req,res){
         }
       }
     }
-    console.log(hotels)
     res.json(hotels)
   })
 })

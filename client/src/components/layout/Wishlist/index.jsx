@@ -58,12 +58,6 @@ export default class Details extends Component {
   }
   removeWishlist(product) {
     console.log(this.state.wishlist);
-    axios
-      .post("/api/wishlist_count", { pid: product, mode: "dec" })
-      .catch((err) => {
-        console.log(err);
-        console.log(err.response);
-      });
     var arr = this.state.wishlist;
     var mode = "remove";
     const index = arr.indexOf(product);
@@ -86,7 +80,7 @@ export default class Details extends Component {
       <div className="col-md-6">
         <div className="thumbnail text-center">
           <div>
-            <Link to={`/product/${product["uniq_id"]}`}>
+            <Link to={`/hotel/${product["uniq_id"]}`}>
               <img
                 width="400"
                 height="300"

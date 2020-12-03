@@ -72,12 +72,6 @@ export default class Details extends Component {
   book(hotel) {}
 
   addWishlist(product) {
-    axios
-      .post("/api/wishlist_count", { pid: product, mode: "inc" })
-      .catch((err) => {
-        console.log(err);
-        console.log(err.response);
-      });
     if (user == "") {
       alert("Please login before adding hotels to wishlist!");
       return;

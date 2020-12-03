@@ -14,7 +14,12 @@ class Landing extends Component {
     this.handleChangeSort = this.handleChangeSort.bind(this);
   }
   componentWillMount() {
-    this.setState({hotels: this.props.location.state.hotels, filteredHotels: this.props.location.state.filteredHotels});
+    axios.get("/api/hotel_all").then((res) => {
+      this.setState({
+        hotels: res.data.hotels
+      });
+    });
+    this.setState({filteredHotels: this.props.location.state.filteredHotels});
   }
 
   handleChangeSort(e) {
@@ -76,7 +81,7 @@ class Landing extends Component {
                     <div className="col-md-4">
                       <FuzzySearch
                         list={list}
-                        keys={["property_name"]}
+                        keys={["property_name", "address", "city"]}
                         width={430}
                         onSelect={() => {
                           console.log(this.state.hotels);

@@ -6,6 +6,7 @@ import { Row } from "react-bootstrap";
 import "./styles.css";
 import FuzzySearch from "react-fuzzy";
 import Banner from "./Banner.js";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 class Landing extends Component {
   constructor(props) {
@@ -24,8 +25,8 @@ class Landing extends Component {
   componentWillMount() {
     axios.get("/api/hotel_all").then((res) => {
       this.setState({
-        hotels: res.data.hotels.slice(0,700),
-        filteredHotels: res.data.hotels.slice(0,700),
+        hotels: res.data.hotels,
+        filteredHotels: res.data.hotels,
         category: "",
         child: "",
         family: "",
@@ -237,6 +238,47 @@ class Landing extends Component {
         <Banner />
         <br/>
         <div className="filter-select">
+        <div className="center-search">
+        <FuzzySearch
+          list={this.state.hotels}
+          keys={["property_name", "address", "city"]}
+          width={430}
+          onSelect={() => {
+            console.log(this.state.hotels);
+          }}
+          resultsTemplate={(
+            props,
+            state,
+            styles,
+            clickHandler
+          ) => {
+            return state.results.map((val, i) => {
+              const style =
+                state.selectedIndex === i
+                  ? styles.selectedResultStyle
+                  : styles.resultsStyle;
+              return (
+                <div
+                  style={style}
+                  onClick={() =>
+                    window.location.replace(
+                      "/hotel/" + val["uniq_id"]
+                    )
+                  }
+                >
+                  <LazyLoadImage
+                    width="100"
+                    height="100"
+                    src={val["image_urls"]}
+                  />
+                  <p>{val["property_name"]}</p>
+                </div>
+              );
+            });
+          }}
+        />
+        </div>
+            <br/><br/>
             <label>
               City
               <select
@@ -260,7 +302,7 @@ class Landing extends Component {
                 <option value="Tennessee">Tennessee</option>
               </select>
             </label>
-            <br />
+            <br /><br/>
             <button className={this.state.selected[0]} value="do" onClick={this.handleFilterChild}>Child Friendly</button>
             <button className={this.state.selected[1]} value="do" onClick={this.handleFilterFamily}>Family Friendly</button>
             <button className={this.state.selected[2]} value="do" onClick={this.handleFilterBusiness}>Business Oriented</button>
@@ -268,8 +310,7 @@ class Landing extends Component {
             <button className={this.state.selected[4]} value="do" onClick={this.handleFilterSmoking}>Smoking Allowed</button>
             <button className={this.state.selected[5]} value="do" onClick={this.handleFilterNoSmoke}>Non Smoking</button>
             <br /><br/>
-            <button onClick={()=>{console.log(this.state.filteredHotels)}}>Check</button>
-            <Link to={{pathname:`/results`, state:this.state}}><button className="searchBtn">Find Hotels</button></Link>
+            <Link to={{pathname:`/results`, state:{filteredHotels: this.state.filteredHotels}}}><button className="searchBtn">Find Hotels</button></Link>
         </div>
       </div>
     );

@@ -31,12 +31,6 @@ export default class Hotels extends Component {
       alert("Please login before adding products to wishlist!");
       return;
     }
-    axios
-      .post("/api/wishlist_count", { pid: product, mode: "inc" })
-      .catch((err) => {
-        console.log(err);
-        console.log(err.response);
-      });
     var mode = "add";
     axios
       .post("/api/wishlist", { mode, user, product })
