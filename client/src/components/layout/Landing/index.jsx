@@ -233,6 +233,7 @@ class Landing extends Component {
   }
 
   render() {
+    console.log(this.state.filteredHotels)
     return (
       <div>
         <Banner />

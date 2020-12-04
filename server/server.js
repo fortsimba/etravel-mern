@@ -49,7 +49,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.get("/api/hotel_all", function(req, res){
-  dbjs.hotel.findOne({},async function(err, docs){
+  dbjs.hotel.findOne({},{"hotels.uniq_id": 1, "hotels.property_name": 1, "hotels.per_person_price":1, "hotels.hotel_star_rating":1, "hotels.image_urls": 1, "hotels.city": 1},async function(err, docs){
     if(err) throw err;
     await res.json(docs);
   });

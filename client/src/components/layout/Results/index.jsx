@@ -22,6 +22,10 @@ class Landing extends Component {
     this.setState({filteredHotels: this.props.location.state.filteredHotels});
   }
 
+  componentDidMount(){
+    window.scrollTo(0,0);
+  }
+
   handleChangeSort(e) {
     this.setState({ sort: e.target.value });
     this.listProducts();
